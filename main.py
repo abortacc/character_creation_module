@@ -61,13 +61,17 @@ def choice_char_class():
         approve_choice = input('Нажми (Y), чтобы подтвердить выбор, или любую другую кнопку, чтобы выбрать другого персонажа ').lower()
     return char_class
 
+def name_checker(char_name: str) -> str:
+    if char_name == "" or char_name == " ":
+        return "Игрок"
+    
+    return char_name.replace(" ", "").capitalize()
+
 
 def main():
     print('Приветствую тебя, искатель приключений!')
     print('Прежде чем начать игру...')
-    char_name = input('...назови себя: ')
-    if char_name == "" or " ":
-        char_name = "Игрок"
+    char_name = name_checker(input('...назови себя: '))
     print(f'Здравствуй, {char_name}! '
           'Сейчас твоя выносливость — 80, атака — 5 и защита — 10.')
     print('Ты можешь выбрать один из трёх путей силы:')

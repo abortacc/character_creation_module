@@ -20,26 +20,17 @@ CHARACTER_CLASSES = {
     }
 }
 
-
 def attack(char_name, char_class):
     base_damage, damage_range = CHARACTER_CLASSES[char_class]['attack']
     return f"{char_name} нанёс урон противнику равный {base_damage + randint(*damage_range)}"
     
 def defence(char_name, char_class):
-    if char_class == 'warrior':
-        return (f'{char_name} блокировал {10 + randint(5, 10)} урона')
-    if char_class == 'mage':
-        return (f'{char_name} блокировал {10 + randint(-2, 2)} урона')
-    if char_class == 'healer':
-        return (f'{char_name} блокировал {10 + randint(2, 5)} урона')
+    base_defence, defence_range = CHARACTER_CLASSES[char_class]['defence']
+    return f"{char_name} применяет защиту равную {base_defence + randint(*defence_range)}"
     
 def special(char_name, char_class):
-    if char_class == 'warrior': 
-        return (f'{char_name} применил специальное умение «Выносливость {80 + 25}»')
-    if char_class == 'mage':
-        return (f'{char_name} применил специальное умение «Атака {5 + 40}»')
-    if char_class == 'healer':
-        return (f'{char_name} применил специальное умение «Защита {10 + 30}»')
+    special_name, special_range = CHARACTER_CLASSES[char_class]['special']
+    return f"{char_name} применил специальное умение {special_name} с силой {special_range}"
 
 def start_training(char_name, char_class):
     if char_class == 'warrior':

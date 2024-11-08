@@ -1,13 +1,30 @@
 from random import randint
 
+CHARACTER_CLASSES = {
+    'warrior': {
+        'attack': (5, (3, 5)),
+        'defence': (10, (5, 10)),
+        'special': ('Выносливость', 80 + 25)
+    },
+
+    'mage': {
+        'attack': (5, (5, 10)),
+        'defence': (10, (-2, 2)),
+        'special': ('Атака', 5 + 40)
+    },
+
+    'healer': {
+        'attack': (5, (-3, -1)),
+        'defence': (10, (2, 5)),
+        'special': ('Защита', 10 + 30)
+    }
+}
+
 
 def attack(char_name, char_class):
-    if char_class == 'warrior':
-        return (f'{char_name} нанёс урон противнику равный {5 + randint(3, 5)}')
-    if char_class == 'mage':
-        return (f'{char_name} нанёс урон противнику равный {5 + randint(5, 10)}')
-    if char_class == 'healer':
-        return (f'{char_name} нанёс урон противнику равный {5 + randint(-3, -1)}')
+    base_damage, damage_range = CHARACTER_CLASSES[char_class]['attack']
+    return f"{char_name} нанёс урон противнику равный {base_damage + randint(*damage_range)}"
+    
 def defence(char_name, char_class):
     if char_class == 'warrior':
         return (f'{char_name} блокировал {10 + randint(5, 10)} урона')
@@ -15,6 +32,7 @@ def defence(char_name, char_class):
         return (f'{char_name} блокировал {10 + randint(-2, 2)} урона')
     if char_class == 'healer':
         return (f'{char_name} блокировал {10 + randint(2, 5)} урона')
+    
 def special(char_name, char_class):
     if char_class == 'warrior': 
         return (f'{char_name} применил специальное умение «Выносливость {80 + 25}»')
@@ -22,9 +40,6 @@ def special(char_name, char_class):
         return (f'{char_name} применил специальное умение «Атака {5 + 40}»')
     if char_class == 'healer':
         return (f'{char_name} применил специальное умение «Защита {10 + 30}»')
-
-
-
 
 def start_training(char_name, char_class):
     if char_class == 'warrior':
@@ -67,7 +82,6 @@ def name_checker(char_name: str) -> str:
     
     return char_name.replace(" ", "").capitalize()
 
-
 def main():
     print('Приветствую тебя, искатель приключений!')
     print('Прежде чем начать игру...')
@@ -79,5 +93,4 @@ def main():
     char_class = choice_char_class()
     print(start_training(char_name, char_class))
     
-
 main()

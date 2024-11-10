@@ -34,6 +34,7 @@ CHARACTER_CLASSES: dict = {
 
 
 def attack(char_name: str, char_class: str) -> str:
+    """Воспроизводит атаку."""
     base_damage, damage_range = CHARACTER_CLASSES[char_class]['attack']
     return (
         f"{char_name} нанёс урон противнику равный "
@@ -41,18 +42,21 @@ def attack(char_name: str, char_class: str) -> str:
 
 
 def defence(char_name: str, char_class: str) -> str:
+    """Воспроизводит защиту."""
     base_defence, defence_range = CHARACTER_CLASSES[char_class]['defence']
     return (f"{char_name} применяет защиту равную "
             f"{base_defence + randint(*defence_range)}")
 
 
 def special(char_name: str, char_class: str) -> str:
+    """Воспроизводит специальное умение."""
     special_name, special_range = CHARACTER_CLASSES[char_class]['special']
     return (f"{char_name} применил специальное умение "
             f"{special_name} с силой {special_range}")
 
 
 def start_training(char_name: str, char_class: str) -> str:
+    """Запускает эвент 'тренировка'."""
 
     commands: dict = {
         'attack': attack,
@@ -79,6 +83,7 @@ def start_training(char_name: str, char_class: str) -> str:
 
 
 def choice_char_class() -> str | None:
+    """Предлагает выбор класса."""
     approve_choice: str | None = None
     char_class: str | None = None
     while approve_choice != 'y':
@@ -101,6 +106,7 @@ def choice_char_class() -> str | None:
 
 
 def name_checker(char_name: str) -> str:
+    """Проверяет валидность имени и форматирует его."""
     if char_name == "" or char_name == " ":
         return "Игрок"
     return char_name.replace(" ", "").capitalize()

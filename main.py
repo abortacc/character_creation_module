@@ -1,6 +1,6 @@
 from random import randint
 
-CHARACTER_CLASSES = {
+CHARACTER_CLASSES: dict = {
 
     'warrior': {
         'attack': (5, (3, 5)),
@@ -31,28 +31,28 @@ CHARACTER_CLASSES = {
 }
 
 
-def attack(char_name, char_class):
+def attack(char_name: str, char_class: str) -> str:
     base_damage, damage_range = CHARACTER_CLASSES[char_class]['attack']
     return (
         f"{char_name} нанёс урон противнику равный "
         f"{base_damage + randint(*damage_range)}")
 
 
-def defence(char_name, char_class):
+def defence(char_name: str, char_class: str) -> str:
     base_defence, defence_range = CHARACTER_CLASSES[char_class]['defence']
     return (f"{char_name} применяет защиту равную "
             f"{base_defence + randint(*defence_range)}")
 
 
-def special(char_name, char_class):
+def special(char_name: str, char_class: str) -> str:
     special_name, special_range = CHARACTER_CLASSES[char_class]['special']
     return (f"{char_name} применил специальное умение "
             f"{special_name} с силой {special_range}")
 
 
-def start_training(char_name, char_class):
+def start_training(char_name: str, char_class: str) -> str:
 
-    commands = {
+    commands: dict = {
         'attack': attack,
         'defence': defence,
         'special': special
@@ -66,7 +66,7 @@ def start_training(char_name, char_class):
           'или special — чтобы использовать свою суперсилу.')
     print('Если не хочешь тренироваться, введи команду skip.')
 
-    cmd = ''
+    cmd: str = ''
     while cmd != 'skip':
         cmd = input('Введи команду: ')
         if cmd in commands:
@@ -76,11 +76,11 @@ def start_training(char_name, char_class):
     return 'Тренировка окончена.'
 
 
-def choice_char_class():
-    approve_choice = None
-    char_class = None
+def choice_char_class() -> str | None:
+    approve_choice: str | None = None
+    char_class: str | None = None
     while approve_choice != 'y':
-        flag = True
+        flag: bool = True
         while flag:
             char_class = input(
                 'Введи название персонажа, за которого хочешь играть: '
@@ -107,12 +107,12 @@ def name_checker(char_name: str) -> str:
 def main():
     print('Приветствую тебя, искатель приключений!')
     print('Прежде чем начать игру...')
-    char_name = name_checker(input('...назови себя: '))
+    char_name: str = name_checker(input('...назови себя: '))
     print(f'Здравствуй, {char_name}! '
           'Сейчас твоя выносливость — 80, атака — 5 и защита — 10.')
     print('Ты можешь выбрать один из трёх путей силы:')
     print('Воитель, Маг, Лекарь')
-    char_class = choice_char_class()
+    char_class: str = choice_char_class()
     print(start_training(char_name, char_class))
 
 

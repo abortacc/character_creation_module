@@ -1,5 +1,7 @@
 from random import randint
 
+from graphic_arts.start_game_banner import run_screensaver
+
 CHARACTER_CLASSES: dict = {
 
     'warrior': {
@@ -104,7 +106,8 @@ def name_checker(char_name: str) -> str:
     return char_name.replace(" ", "").capitalize()
 
 
-def main():
+if __name__ == "__main__":
+    run_screensaver()
     print('Приветствую тебя, искатель приключений!')
     print('Прежде чем начать игру...')
     char_name: str = name_checker(input('...назови себя: '))
@@ -114,7 +117,3 @@ def main():
     print('Воитель, Маг, Лекарь')
     char_class: str = choice_char_class()
     print(start_training(char_name, char_class))
-
-
-if __name__ == "__main__":
-    main()
